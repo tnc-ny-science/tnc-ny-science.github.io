@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/Control.OSMGeocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/Control.OSMGeocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/grboro0.js"></script>
+        <script src="data/grcd1.js"></script>
+        <script src="data/grtribarea2.js"></script>
+        <script src="data/grbldgs3.js"></script>
+        <script src="data/greenrooffootprints4.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:18, minZoom:1
+        }).fitBounds([[40.4847647917,-74.5107289621],[40.9247001373,-73.4422562297]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        L.control.locate().addTo(map);
+        var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'feet',
+            secondaryLengthUnit: 'miles',
+            primaryAreaUnit: 'sqfeet',
+            secondaryAreaUnit: 'sqmiles'
+        });
+        measureControl.addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 18
+        });
+        basemap0.addTo(map);
+        function setBounds() {
+        }
+        function pop_grboro0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">num_greenroofs</th>\
+                        <td>' + (feature.properties['num_greenroofs'] !== null ? Autolinker.link(String(feature.properties['num_greenroofs'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">boroname</th>\
+                        <td>' + (feature.properties['boroname'] !== null ? Autolinker.link(String(feature.properties['boroname'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_grboro0_0(feature) {
+            if (feature.properties['num_greenroofs'] >= 2.000000 && feature.properties['num_greenroofs'] <= 17.400000 ) {
+                return {
+                pane: 'pane_grboro0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(247,252,245,0.5)',
+            }
+            }
+            if (feature.properties['num_greenroofs'] >= 17.400000 && feature.properties['num_greenroofs'] <= 32.800000 ) {
+                return {
+                pane: 'pane_grboro0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(202,234,195,0.5)',
+            }
+            }
+            if (feature.properties['num_greenroofs'] >= 32.800000 && feature.properties['num_greenroofs'] <= 48.200000 ) {
+                return {
+                pane: 'pane_grboro0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(123,200,124,0.5)',
+            }
+            }
+            if (feature.properties['num_greenroofs'] >= 48.200000 && feature.properties['num_greenroofs'] <= 63.600000 ) {
+                return {
+                pane: 'pane_grboro0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(42,146,74,0.5)',
+            }
+            }
+            if (feature.properties['num_greenroofs'] >= 63.600000 && feature.properties['num_greenroofs'] <= 79.000000 ) {
+                return {
+                pane: 'pane_grboro0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(0,68,27,0.5)',
+            }
+            }
+        }
+        map.createPane('pane_grboro0');
+        map.getPane('pane_grboro0').style.zIndex = 400;
+        map.getPane('pane_grboro0').style['mix-blend-mode'] = 'normal';
+    var layer_grboro0 = new L.geoJson(json_grboro0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_grboro0',
+        onEachFeature: pop_grboro0,
+        style: style_grboro0_0,
+    });
+        bounds_group.addLayer(layer_grboro0);
+        map.addLayer(layer_grboro0);
+        function pop_grcd1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">community_district</th>\
+                        <td>' + (feature.properties['community_district'] !== null ? Autolinker.link(String(feature.properties['community_district'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">num_grs</th>\
+                        <td>' + (feature.properties['num_grs'] !== null ? Autolinker.link(String(feature.properties['num_grs'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_grcd1_0(feature) {
+            if (feature.properties['num_grs'] >= 0.000000 && feature.properties['num_grs'] <= 0.000000 ) {
+                return {
+                pane: 'pane_grcd1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(247,252,245,0.5)',
+            }
+            }
+            if (feature.properties['num_grs'] >= 0.000000 && feature.properties['num_grs'] <= 7.600000 ) {
+                return {
+                pane: 'pane_grcd1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(202,234,195,0.5)',
+            }
+            }
+            if (feature.properties['num_grs'] >= 7.600000 && feature.properties['num_grs'] <= 11.400000 ) {
+                return {
+                pane: 'pane_grcd1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(123,200,124,0.5)',
+            }
+            }
+            if (feature.properties['num_grs'] >= 11.400000 && feature.properties['num_grs'] <= 15.200000 ) {
+                return {
+                pane: 'pane_grcd1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(42,146,74,0.5)',
+            }
+            }
+            if (feature.properties['num_grs'] >= 15.200000 && feature.properties['num_grs'] <= 19.000000 ) {
+                return {
+                pane: 'pane_grcd1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(0,68,27,0.5)',
+            }
+            }
+        }
+        map.createPane('pane_grcd1');
+        map.getPane('pane_grcd1').style.zIndex = 401;
+        map.getPane('pane_grcd1').style['mix-blend-mode'] = 'normal';
+    var layer_grcd1 = new L.geoJson(json_grcd1, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_grcd1',
+        onEachFeature: pop_grcd1,
+        style: style_grcd1_0,
+    });
+        bounds_group.addLayer(layer_grcd1);
+        function pop_grtribarea2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">num_grs</th>\
+                        <td>' + (feature.properties['num_grs'] !== null ? Autolinker.link(String(feature.properties['num_grs'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_grtribarea2_0(feature) {
+            if (feature.properties['num_grs'] >= 0.000000 && feature.properties['num_grs'] <= 0.000000 ) {
+                return {
+                pane: 'pane_grtribarea2',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.71)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(247,252,245,0.71)',
+            }
+            }
+            if (feature.properties['num_grs'] >= 0.000000 && feature.properties['num_grs'] <= 4.800000 ) {
+                return {
+                pane: 'pane_grtribarea2',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.71)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(202,234,195,0.71)',
+            }
+            }
+            if (feature.properties['num_grs'] >= 4.800000 && feature.properties['num_grs'] <= 7.200000 ) {
+                return {
+                pane: 'pane_grtribarea2',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.71)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(123,200,124,0.71)',
+            }
+            }
+            if (feature.properties['num_grs'] >= 7.200000 && feature.properties['num_grs'] <= 9.600000 ) {
+                return {
+                pane: 'pane_grtribarea2',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.71)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(42,146,74,0.71)',
+            }
+            }
+            if (feature.properties['num_grs'] >= 9.600000 && feature.properties['num_grs'] <= 12.000000 ) {
+                return {
+                pane: 'pane_grtribarea2',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.71)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(0,68,27,0.71)',
+            }
+            }
+        }
+        map.createPane('pane_grtribarea2');
+        map.getPane('pane_grtribarea2').style.zIndex = 402;
+        map.getPane('pane_grtribarea2').style['mix-blend-mode'] = 'normal';
+    var layer_grtribarea2 = new L.geoJson(json_grtribarea2, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_grtribarea2',
+        onEachFeature: pop_grtribarea2,
+        style: style_grtribarea2_0,
+    });
+        bounds_group.addLayer(layer_grtribarea2);
+        function pop_grbldgs3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">bin</th>\
+                        <td>' + (feature.properties['bin'] !== null ? Autolinker.link(String(feature.properties['bin'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_grbldgs3_0() {
+            return {
+                pane: 'pane_grbldgs3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(224,248,5,1.0)',
+            }
+        }
+        map.createPane('pane_grbldgs3');
+        map.getPane('pane_grbldgs3').style.zIndex = 403;
+        map.getPane('pane_grbldgs3').style['mix-blend-mode'] = 'normal';
+    var layer_grbldgs3 = new L.geoJson(json_grbldgs3, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_grbldgs3',
+        onEachFeature: pop_grbldgs3,
+        style: style_grbldgs3_0,
+    });
+        bounds_group.addLayer(layer_grbldgs3);
+        map.addLayer(layer_grbldgs3);
+        function pop_greenrooffootprints4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_greenrooffootprints4_0() {
+            return {
+                pane: 'pane_greenrooffootprints4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(238,140,173,0.0)',
+            }
+        }
+        map.createPane('pane_greenrooffootprints4');
+        map.getPane('pane_greenrooffootprints4').style.zIndex = 404;
+        map.getPane('pane_greenrooffootprints4').style['mix-blend-mode'] = 'normal';
+    var layer_greenrooffootprints4 = new L.geoJson(json_greenrooffootprints4, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_greenrooffootprints4',
+        onEachFeature: pop_greenrooffootprints4,
+        style: style_greenrooffootprints4_0,
+    });
+        bounds_group.addLayer(layer_greenrooffootprints4);
+        map.addLayer(layer_greenrooffootprints4);
+        var osmGeocoder = new L.Control.OSMGeocoder({
+            collapsed: false,
+            position: 'topright',
+            text: 'Search',
+        });
+        osmGeocoder.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/greenrooffootprints4.png" /> greenroof_footprints': layer_greenrooffootprints4,'<img src="legend/grbldgs3.png" /> gr_bldgs': layer_grbldgs3,'gr_tribarea<br /><table><tr><td style="text-align: center;"><img src="legend/grtribarea2_000.png" /></td><td> 0 - 0 </td></tr><tr><td style="text-align: center;"><img src="legend/grtribarea2_051.png" /></td><td> 0 - 5 </td></tr><tr><td style="text-align: center;"><img src="legend/grtribarea2_572.png" /></td><td> 5 - 7 </td></tr><tr><td style="text-align: center;"><img src="legend/grtribarea2_7103.png" /></td><td> 7 - 10 </td></tr><tr><td style="text-align: center;"><img src="legend/grtribarea2_10124.png" /></td><td> 10 - 12 </td></tr></table>': layer_grtribarea2,'gr_cd<br /><table><tr><td style="text-align: center;"><img src="legend/grcd1_000.png" /></td><td> 0 - 0 </td></tr><tr><td style="text-align: center;"><img src="legend/grcd1_081.png" /></td><td> 0 - 8 </td></tr><tr><td style="text-align: center;"><img src="legend/grcd1_8112.png" /></td><td> 8 - 11 </td></tr><tr><td style="text-align: center;"><img src="legend/grcd1_11153.png" /></td><td> 11 - 15 </td></tr><tr><td style="text-align: center;"><img src="legend/grcd1_15194.png" /></td><td> 15 - 19 </td></tr></table>': layer_grcd1,'gr_boro<br /><table><tr><td style="text-align: center;"><img src="legend/grboro0_2170.png" /></td><td> 2 - 17 </td></tr><tr><td style="text-align: center;"><img src="legend/grboro0_17331.png" /></td><td> 17 - 33 </td></tr><tr><td style="text-align: center;"><img src="legend/grboro0_33482.png" /></td><td> 33 - 48 </td></tr><tr><td style="text-align: center;"><img src="legend/grboro0_48643.png" /></td><td> 48 - 64 </td></tr><tr><td style="text-align: center;"><img src="legend/grboro0_64794.png" /></td><td> 64 - 79 </td></tr></table>': layer_grboro0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
