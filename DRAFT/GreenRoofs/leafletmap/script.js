@@ -57,7 +57,7 @@
 var imagery2016 = L.tileLayer('	https://maps.nyc.gov/xyz/1.0.0/photo/2016/{z}/{x}/{y}.png8', {
   attribution: 'Tiles by <a href="https://maps.nyc.gov/tiles/">The City of New York</a>',
   minNativeZoom: 8,
-  maxNativeZoom: 20,
+  maxNativeZoom: 18,
   subdomains: '1234',
   bounds: L.latLngBounds([39.3682, -75.9374], [42.0329, -71.7187])
 });
@@ -65,7 +65,7 @@ var imagery2016 = L.tileLayer('	https://maps.nyc.gov/xyz/1.0.0/photo/2016/{z}/{x
 var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	subdomains: 'abcd',
-	maxZoom: 19
+	maxZoom: 18
 });
 
 var baseMaps = {
@@ -144,7 +144,7 @@ var htmlLegend1and2 = L.control.htmllegend({
         visibleIcon: 'icon icon-eye',
         hiddenIcon: 'icon icon-eye-slash'
     })
-    map.addControl(htmlLegend1and2)
+    //map.addControl(htmlLegend1and2)
 
  map.attributionControl.addAttribution('Map developed by <a href="https://www.nature.org">The Nature Conservancy</a>',{position:'topright'});
 });
