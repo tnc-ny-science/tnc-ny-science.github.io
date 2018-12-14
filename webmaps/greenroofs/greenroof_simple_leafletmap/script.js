@@ -1,4 +1,4 @@
-//Script for green roof webmap; developed by Mike Treglia (michael.treglia@tnc.org)
+//Script for green roof webmap; developed by Mike Treglia (michael.treglia@tnc.org)//
 
   var grData = $.ajax({
 	 url:"https://raw.githubusercontent.com/tnc-ny-science/NYC_GreenRoofMapping/master/greenroof_gisdata/CurrentDatasets/GreenRoofData2016_20180917.geojson",
