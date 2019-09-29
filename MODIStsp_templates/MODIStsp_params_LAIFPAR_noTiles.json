@@ -42,7 +42,7 @@
   "ts_format": ["R rasterStack"],
   "compress": ["LZW"],
   "nodata_change": ["No"],
-  "scale_val": ["No"],
+  "scale_val": ["Yes"],
   "delete_hdf": ["No"],
   "reprocess": ["No"],
   "out_folder": [""],
