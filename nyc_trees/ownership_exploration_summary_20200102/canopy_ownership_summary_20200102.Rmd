@@ -1,0 +1,147 @@
+---
+title: "Tree Canopy and Land Area by Ownership"
+author: Mike Treglia, The Nature Conservancy
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+    #social: [ "twitter", "facebook", "menu" ]
+    #source_code: hide
+    theme: default
+#runtime: shiny
+
+---
+
+
+# Description {.sidebar} 
+=====================================
+
+### Description: 
+
+The top figure represents ownership and land uses associated with tree canopy. The bottom figure represents the same, but with land in general.
+
+For each land use, the 30 biggest owners of canopy were identified, and maintained as distinct entities for this graphic. All others, or where land owners were not known (e.g., based on PLUTO), were assigned "Lumped".
+
+Hover over the charts, and click on parts to get a better idea of what's happening in specific realms. The right-hand part shows the total canopy or land area, in acres, with the percentage of what you are hovering over compared to the full circle being displayed. Thus, if you click color representing "City" (i.e., city-owned) it will zoom into a new circle showing the breakdown of land uses and owenrship for city-owned property. Thus, the content on the right will then be for the new circle, of just city-owned property.
+
+At this point this is very preliminary and numbers are approximate, but it can be pretty easily adjusted in terms groupings and other content. Style is a lot more challenging to adjust. 
+
+
+
+Citywide 
+=====================================
+###  Citywide - Canopy {data-height=600}
+
+#### Canopy
+
+<iframe  title="test" src="citywide_canopy.html" width="1100" height="600"></iframe>
+
+
+
+
+
+###  Citywide - Land {data-height=600}
+----------------------------
+
+#### Land
+
+<iframe  title="test" src="citywide_land.html" width="1100" height="600"></iframe>
+
+
+Staten Island 
+=====================================
+
+###  Staten Island - Canopy {data-height=600}
+
+#### Canopy
+
+
+<iframe  title="test" src="si_canopy.html" width="1100" height="600"></iframe>
+
+
+###  Staten Island - Land {data-height=600}
+----------------------------
+
+#### Land
+
+<iframe  title="test" src="si_land.html" width="1100" height="600"></iframe>
+
+
+
+
+
+Queens 
+=====================================
+
+###  Queens - Canopy {data-height=600}
+
+#### Canopy
+
+<iframe  title="test" src="qns_canopy.html" width="1100" height="600"></iframe>
+
+
+###  Queens - Land {data-height=600}
+----------------------------
+
+#### Land
+
+<iframe  title="test" src="qns_land.html" width="1100" height="600"></iframe>
+
+
+Bronx 
+=====================================
+
+###  Bronx - Canopy {data-height=600}
+
+#### Canopy
+
+
+<iframe  title="test" src="bx_canopy.html" width="1100" height="600"></iframe>
+
+
+###  Bronx - Land {data-height=600}
+----------------------------
+
+#### Land
+
+<iframe  title="test" src="bx_land.html" width="1100" height="600"></iframe>
+
+
+Brooklyn 
+=====================================
+
+###  Brooklyn - Canopy {data-height=600}
+
+#### Canopy
+
+
+<iframe  title="test" src="bk_canopy.html" width="1100" height="600"></iframe>
+
+
+###  Brooklyn - Land {data-height=600}
+----------------------------
+
+#### Land
+
+<iframe  title="test" src="bk_land.html" width="1100" height="600"></iframe>
+
+
+Manhattan 
+=====================================
+
+###  Manhattan - Canopy {data-height=600}
+
+#### Canopy
+
+
+<iframe  title="test" src="mn_canopy.html" width="1100" height="600"></iframe>
+
+
+###  Manhattan - Land {data-height=600}
+----------------------------
+
+#### Land
+
+<iframe  title="test" src="mn_land.html" width="1100" height="600"></iframe>
+
+
