@@ -1,0 +1,197 @@
+---
+title: "Tree Canopy and Land Area by Ownership & Land Use"
+author: Mike Treglia, The Nature Conservancy
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+    #social: [ "twitter", "facebook", "menu" ]
+    #source_code: hide
+    theme: default
+#runtime: shiny
+
+---
+
+
+
+# Description {.sidebar} 
+=====================================
+
+### How to Use This Site: 
+
+The top chart to the right depicts where tree canopy is, in terms of land use and land ownership, based [recent NYC Tree Canopy Data](https://data.cityofnewyork.us/Environment/Tree-Canopy-Change-2010-2017-/by9k-vhck) and multiple datasets that delineate ownership, use, or jurisdiction of land across the city (mainly [PLUTO](https://www1.nyc.gov/site/planning/data-maps/open-data/dwn-pluto-mappluto.page)). The bottom chart represents the uses and ownership of all land. You can view the information for individual boroughs by clicking the tabs  across the top. If you click on a tab and the charts appear incomplete, just hit the Reload button in your browser. 
+
+The rings of the charts represent the following, from inner to outer:
+
+* All canopy or land area, respectively (the single, solid ring labeled "Root");
+* Coarse, approximate Ownership Designations, such as City, Private, Rights of Way (ROW), etc.;
+* Land Use - generally based on Land Use designations in PLUTO for individual tax lots.
+  * NYC Parks land is indicated in this level and then sub-divided by parkland type given large portion of the City's canopy encompassed in this group; and 
+* Specific ownership; the top 30 owners of canopy (by area) in each coarse ownership and land use grouping were represented with their names based on public data, and others were grouped into a coarse category, labeled "Lumped".
+
+Hover over the charts to see labels for the different pieces of it; the respective values, in acreage and percentage will appear to the right. If you click on a "slice" of the chart, chart will reshape to show that focal area and the components within it. For example, in the first chart you see, if you click on the Green piece representing canopy on City-owned land, the chart will reshape to allow a better view of what is within City-owned land. For example, if you click the green color representing City-owned, the circle will morph to showing the breakdown of land uses and ownership for that group. The numbers to the right will also adjust - the 100% will represent the area for the slice you clicked on, and as you hover over smaller slices in the outer portions of the resulting chart, the percentages will represent the percentage of the new circle - in this case, percentage of the City-owned canopy.
+
+
+***Disclaimer:***
+
+The Nature Conservancy (TNC) compiled this information based on publicly available data sources. The data presented here are considered estimates, based on analyses of available data. Thus, the content is intended to be generally informative, but may be imperfect and are not intended to be the basis of legal decisions. 
+
+
+*Access Constraints:*
+
+All information provided as is. This is not a survey quality dataset. The Nature Conservancy makes no warranty as to the currency, completeness, accuracy or utility of any specific data. This disclaimer applies both to individual use of the data and aggregate use with other data. It is strongly recommended that careful attention be paid to the contents of the metadata file associated with these data.
+
+
+*Use Constraints:*
+
+The Nature Conservancy shall not be held liable for improper or incorrect use of the data described and/or contained herein. Any sale, distribution, loan, or offering for use of these digital data, in whole or in part, is prohibited without the approval of the Nature Conservancy. The use of these data to produce other  products and services with the intent to sell for a profit is prohibited without the written consent of the Nature Conservancy. All parties receiving these data must be informed of these restrictions. The Nature Conservancy shall be acknowledged as data contributors to any reports or other products derived from these data.
+
+Questions about this work can be directed to Mike Treglia, Urban Spatial Planner at The Nature Conservancy in New York, at [michael.treglia@tnc.org](mailto:michael.treglia@tnc.org).
+
+
+
+Citywide 
+=====================================
+###  Citywide {data-height=600}
+
+#### Canopy
+
+<iframe  title="test" src="citywide_canopy.html" width="1100" height="600"></iframe>
+
+
+
+
+
+###  Citywide - Land {data-height=600}
+----------------------------
+
+#### Land
+
+<iframe  title="test" src="citywide_land.html" width="1100" height="600"></iframe>
+
+
+Staten Island 
+=====================================
+
+###  Staten Island {data-height=600}
+
+#### Canopy
+
+
+<iframe  title="test" src="si_canopy.html" width="1100" height="600"></iframe>
+
+
+###  Staten Island - Land {data-height=600}
+----------------------------
+
+#### Land
+
+<iframe  title="test" src="si_land.html" width="1100" height="600"></iframe>
+
+
+
+
+
+Queens 
+=====================================
+
+###  Queens {data-height=600}
+
+#### Canopy
+
+<iframe  title="test" src="qns_canopy.html" width="1100" height="600"></iframe>
+
+
+###  Queens - Land {data-height=600}
+----------------------------
+
+#### Land
+
+<iframe  title="test" src="qns_land.html" width="1100" height="600"></iframe>
+
+
+Bronx 
+=====================================
+
+###  Bronx {data-height=600}
+
+#### Canopy
+
+
+<iframe  title="test" src="bx_canopy.html" width="1100" height="600"></iframe>
+
+
+###  Bronx - Land {data-height=600}
+----------------------------
+
+#### Land
+
+<iframe  title="test" src="bx_land.html" width="1100" height="600"></iframe>
+
+
+Brooklyn 
+=====================================
+
+###  Brooklyn {data-height=600}
+
+#### Canopy
+
+
+<iframe  title="test" src="bk_canopy.html" width="1100" height="600"></iframe>
+
+
+###  Brooklyn - Land {data-height=600}
+----------------------------
+
+#### Land
+
+<iframe  title="test" src="bk_land.html" width="1100" height="600"></iframe>
+
+
+Manhattan 
+=====================================
+
+###  Manhattan {data-height=600}
+
+#### Canopy
+
+
+<iframe  title="test" src="mn_canopy.html" width="1100" height="600"></iframe>
+
+
+###  Manhattan - Land {data-height=600}
+----------------------------
+
+#### Land
+
+<iframe  title="test" src="mn_land.html" width="1100" height="600"></iframe>
+
+
+
+Disclaimer & Data Sources 
+=====================================
+
+### Disclaimer & Data Sources 
+
+
+
+
+#### Disclaimer
+
+The Nature Conservancy (TNC) compiled this information based on publicly available data sources. The data presented here are considered estimates, based on analyses of available data. Thus, the content is intended to be generally informative, but may be imperfect and are not intended to be the basis of legal decisions. 
+
+##### Access Constraints:
+All information provided as is. This is not a survey quality dataset. The Nature Conservancy makes no warranty as to the currency, completeness, accuracy or utility of any specific data. This disclaimer applies both to individual use of the data and aggregate use with other data. It is strongly recommended that careful attention be paid to the contents of the metadata associated with these data.
+
+##### Use Constraints:
+The Nature Conservancy shall not be held liable for improper or incorrect use of the data described and/or contained herein. Any sale, distribution, loan, or offering for use of these digital data, in whole or in part, is prohibited without the approval of the Nature Conservancy. The use of these data to produce other  products and services with the intent to sell for a profit is prohibited without the written consent of the Nature Conservancy. All parties receiving these data must be informed of these restrictions. The Nature Conservancy shall be acknowledged as data contributors to any reports or other products derived from these data.
+
+##### Contact:
+Questions about this work can be directed to Mike Treglia, Urban Spatial Planner at The Nature Conservancy in New York, at [michael.treglia@tnc.org](mailto:michael.treglia@tnc.org).
+
+
+----------------------------
+
+####  Data Sources
+
+*More Info Coming Soon!*
