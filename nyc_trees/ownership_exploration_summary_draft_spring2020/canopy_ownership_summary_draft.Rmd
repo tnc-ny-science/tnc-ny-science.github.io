@@ -194,4 +194,17 @@ Questions about this work can be directed to Mike Treglia, Urban Spatial Planner
 
 ####  Data Sources
 
-*More Info Coming Soon!*
+To generate the content on this site, we developed a GIS layer that is an *estimate* of ownership or jurisdiction of land across the city (hereafter an ownership mashup layer), and overlaid the most recent spatial tree canopy dataset (representing polygons of tree canopy and canopy change across 2010 and 2017) - [https://data.cityofnewyork.us/Environment/Tree-Canopy-Change-2010-2017-/by9k-vhck](https://data.cityofnewyork.us/Environment/Tree-Canopy-Change-2010-2017-/by9k-vhck). 
+
+To develop the ownership mashup layer, we started with the [NYC Borough Boundaries](https://data.cityofnewyork.us/City-Government/Borough-Boundaries/tqmj-j8zm) data, and intersected the [NYC MapPLUTO dataset](https://www1.nyc.gov/site/planning/data-maps/open-data/dwn-pluto-mappluto.page) (version 18v2b), which represents tax lots (i.e., parcels) across the city. Recognizing publicly-owned properties are not necesarily up to date in the source data, we overlaid other datasets to help fill gaps. For example, we incorporated information from the National Park Service that represent areas managed by that entity, from the [NYS GIS Data Repository on State-Owned Tax Parcels](http://gis.ny.gov/gisdata/inventories/details.cfm?DSID=1300), and [NYC Parks Properties](https://data.cityofnewyork.us/Recreation/Parks-Properties/enfh-gkve). The dataets used were generally the latest available as of early July 2019.  Other data can be incorporated to further improve this, which is some pending work (e.g., for NYCHA Properties), which we look forward to doing - please reach out if there are other similar datasets that tie to ownership or jurisdiction of land across NYC.
+
+For most land ownership and land use descriptions, we used what was available in MapPLUTO 18v2, though superceded that information when more reliable data were available. For example, if MapPLUTO indicated one city agency owned a parcel, but it was in the NYC Parks Properties Dataset, we replaced the owner in MapPLUTO with NYC Parks, as they actively maintain a dataset of the areas they work on (data at the link above). Furthermore, given the wide variety of spellings and acronyms for NYC agencies in MapPLUTO 18v2b (and earlier versions), we updated owner names for city-owned properties (based on a join of the borough-block-lot number) from MapPLUTO 20v1, in which many names of public entities were standardized. There are numerous private owners whos names are represented in various ways, and we did not attempt to reconcile those challenges given the enormity of the task.
+
+
+We made some other specific adjustments to help ourselves and others better understand real-world dynamics of land and tree canopy in NYC:
+
+* Recognizing the large area of land the NYC Parks manages, under the City-owned category, we elevated that land type to a land use, with the nested groups indicating park types to better pull out these dynamics.
+
+* Rights of Way (inner-most ring in the charts, listed as *Assumed ROW*) were approximated as areas of land that were not in clearly delineated parcels, or other jurisdiction based on datasets representing National Park Service or NYC Parks lands. This generally captures roadways and sidewalks.
+
+* Though cemeteries are not delineated as a land use class in MapPLUTO, they are a land type that often has lots of tree canopy, along with large acreage in general. Thus, we identified cemeteries based on the Building Code in MapPLUTO and represented them as a distinct land use. This is most prominently seen in the *Misc_TaxExempt* ownership type.
