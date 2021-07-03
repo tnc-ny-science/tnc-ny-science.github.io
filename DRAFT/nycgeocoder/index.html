@@ -2,15 +2,19 @@
 <html>
 <head>
     
-    <title>NYC Labs Geocoder</title>
+    <title>Green Roof Tax Abatement - Priority Community District Locator</title>
 
     <meta charset="utf-8" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     
-    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="https://nature.org/content/dam/tnc/nature/en/icons/general-icons/icon_nature_favicon.ico" />
     <link rel="stylesheet" href="demo.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+
+   <!-- SORTING OUT CSS - DEMOCOPY IS leafletcss+some stuff for legend (not really working)-->
+   <!--<link rel="stylesheet" href="democopy.css" /> -->
+
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/> 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
     <!-- Load geocoding plugin after Leaflet -->
@@ -27,21 +31,33 @@
 <body>
 
 
-<div class="place-holder">
-    <p>Geocoder app for locating priority NYC Community Distictricts.</p>
-    <p>Place holder div for testing reduced size map</p>
+<div class="place-holder1">
+    <p><strong>Is your property within a Priority Community District for the 
+        <a target='_blank' rel='noopener noreferrer' href="https://www1.nyc.gov/site/sustainability/legislation/legislation-rules.page">Green Roof Tax Abatement?</a>
+    </br></br>Enter your address using the icon in the top-right of the map and find out*</strong>
+<!--    </br></br><small>Properties in Priority Community Districts are eligible for an abatement of $15/sq ft.
+    </br>The rate for properties in other Community Districts is $5.23/sq ft.</small></p>
+    <p>Place holder div for testing reduced size map</p>-->
 </div>
     <div id="mapid"></div>
-<div class="place-holder">
-    <p>Another place holder div for testing</p>
+<div class="place-holder2">
+    <p2><br/><i>* This tool is intended for informational purposes only.
+        <!-- LINK TO A PAGE ON THE GITHUB REPO -->
+    <a target='_blank' rel='noopener noreferrer' href="https://github.com/tnc-ny-science/nycgeocoder">Click here for disclaimer and terms of use.</a></i>
+    <br/>Web-app developed by <a target='_blank' rel='noopener noreferrer' href="https://www.nature.org/en-us/about-us/where-we-work/united-states/new-york/">
+        The Nature Conservancy in New York</a>
+    <br/>
+    <a target='_blank' rel='noopener noreferrer' href = "https://github.com/tnc-ny-science/nycgeocoder"><small><strong>Check out this project on GitHub</strong></small>
+        <img src="images/GitHub-Mark/PNG/GitHub-Mark-Light-32px.png" width="12" height="12" alt="GitHub Logo"></a>
+    </p2>
 </div>
 
 <script>
     /*global variables */
 
     /*set thematic colors */
-    var priorityFill = '#3ed18f';
-    var nonpriorityFill = '#ef8b75';
+    var priorityFill = 'rgba(205, 201, 15, 0.2)';
+    var nonpriorityFill = 'rgba(0, 150, 204, 0.2)';
 
     /*community district layer*/
     var districtLayer = null;
@@ -51,13 +67,53 @@
 
     /*list fields here to support schema change for community district layer */
     var priorityDistrictFieldName = "Tax Abatement Priority Area";
-    var districtIDFieldName = "borocd"
+    var districtIDFieldName = "boroname_cd";
+    var cb_url = "cb_website";
+    var cd_profile_url = "profileurl";
+
+
+     //Basemap Options
+     // Currently Active
+    var basemap =  L.tileLayer('https://maps{s}.nyc.gov/xyz/1.0.0/carto/basemap/{z}/{x}/{y}.jpg', {
+    minNativeZoom: 8,
+    maxNativeZoom: 19,
+    subdomains: '1234',
+    bounds: L.latLngBounds([39.3682, -75.9374], [42.0329, -71.7187])
+    });
+    var labels = L.tileLayer('https://maps{s}.nyc.gov/xyz/1.0.0/carto/label/{z}/{x}/{y}.png8', {
+    attribution: 'basemap by <a href="https://maps.nyc.gov/tiles/">NYC DoITT</a>',
+    minNativeZoom: 11,
+    maxNativeZoom: 19,
+    subdomains: '1234',
+    bounds: L.latLngBounds([39.3682, -75.9374], [42.0329, -71.7187])
+    });
+
+/*      // NOT CURRENTLY USED - Imagery and the labels to go over it. 
+        //Will only change add if the right labels can be kept with right basemap
+    var imagery2018 = L.tileLayer('https://maps.nyc.gov/xyz/1.0.0/photo/2018/{z}/{x}/{y}.png8', {
+    attribution: 'imagery from <a href="https://maps.nyc.gov/tiles/">NYC DoITT</a>',
+    minNativeZoom: 11,
+    maxNativeZoom: 19,
+    subdomains: '1234',
+    bounds: L.latLngBounds([39.3682, -75.9374], [42.0329, -71.7187])
+    }); 
+    var labels_light = L.tileLayer('https://maps.nyc.gov/xyz/1.0.0/carto/label-lt/{z}/{x}/{y}.png', {
+    attribution: 'imagery from <a href="https://maps.nyc.gov/tiles/">NYC DoITT</a>',
+    minNativeZoom: 11,
+    maxNativeZoom: 19,
+    subdomains: '1234',
+    bounds: L.latLngBounds([39.3682, -75.9374], [42.0329, -71.7187])
+    });  */
+
+
 
     /*create and load app components*/
     createMap();
     addMapLayers();
     createGeocoder();
     addGeocoderSelectionHandler();
+    addLegend();
+    L.control.scale().addTo(districtmap);
 
     /*use popup centered in map to convey errors */
     function passErrorToPopup(e){       
@@ -73,19 +129,30 @@
     function createMap() {
         var mapOptions = {
             maxBounds: [ [ 39.50,-75.74 ] , [41.752,-71.92]],
-            minZoom: 10
+            minZoom: 10,
+            layers:[basemap, labels]
         }
 
         //instantiate map
-        districtmap = L.map('mapid', mapOptions).setView([40.752, -73.9], 10);
+        districtmap = L.map('mapid', mapOptions).setView([40.703312, -73.97968], 10);
 
+    }
 
-        L.tileLayer('https://maps{s}.nyc.gov/xyz/1.0.0/carto/basemap/{z}/{x}/{y}.jpg', {
-          minNativeZoom: 8,
-          maxNativeZoom: 19,
-          subdomains: '1234',
-          bounds: L.latLngBounds([39.3682, -75.9374], [42.0329, -71.7187])
-        }).addTo(districtmap);
+    function addLegend(){
+
+        // Add LegendLegend specific
+        var legend = L.control({ position: "bottomright" });
+
+        legend.onAdd = function(districtmap) {
+          var div = L.DomUtil.create("div", "legend");
+          div.innerHTML += "<h4>Tax Abatement<br>Priority Areas</h4>";
+          div.innerHTML += '<i1 style="background:' + priorityFill + '"></i1><span>Priority Community District</span><br>';
+          div.innerHTML += '<i1 style="background:' + nonpriorityFill + '"></i1><span>Not Priority Community District</span><br>';
+          return div;
+        };
+        legend.addTo(districtmap);
+
+        
     }
 
     function addMapLayers(){
@@ -95,18 +162,25 @@
                 districtLayer = L.geoJSON(json, {            
                 style: function (feature) {
                     /*conditionally set overlay fill color*/
-                    color = priorityFill
+                    color = priorityFill, color
                     if (feature.properties.grta_priority == "No") {
                         color = nonpriorityFill;
                     }
 
-                    return {color: color};
+                    return {fillColor: color,
+                            fillOpacity:1,
+                            weight:1,
+                            color: "gray"};
                     }
                 })            
                 .bindPopup(
                     function (layer) {
                     // optionally enable inspection of district layer here
-                    return "popup message-- borocd: " + layer.feature.properties.borocd;
+                    return  "<strong>Community District:</strong> " + layer.feature.properties.boroname_cd + "<br/>" +
+                        "<strong>Priority Area:</strong> " + layer.feature.properties.grta_priority + "<br/>" +
+                        "<strong><a target='_blank' rel='noopener noreferrer' href=" + layer.feature.properties.cb_website + ">Community District Website</a></strong>" + "<br/>" +
+                        "<strong><a target='_blank' rel='noopener noreferrer' href=" + layer.feature.properties.profileurl + ">Community District Profile</a></strong>";
+
                 })
                 .addTo(districtmap);
             });
@@ -121,12 +195,12 @@
             //define geocoder options
             var options = {
                   url: "https://geosearch.planninglabs.nyc/v1",
-                  attribution: "geocoding by <a href='https://geosearch.planninglabs.nyc'>NYC Planning</a>",          
-                  panToPoint: true,
+                  attribution: "geocoding by <a href='https://geosearch.planninglabs.nyc'>NYC Planning</a>", 
+                panToPoint: true,
                   markers: false,
                   textStrings: {
-                    INPUT_PLACEHOLDER: 'Enter address to find community district',
-                    INPUT_TITLE_ATTRIBUTE: 'Determine if address is within a priority community district'
+                    INPUT_PLACEHOLDER: 'Enter address to find Community District',
+                    INPUT_TITLE_ATTRIBUTE: 'Determine if address is within a Priority Community District for the Green Roof Tax Abatement'
                   }
                 }
         
@@ -203,9 +277,10 @@
         if (intersectionData[1]){
         //success message
             popupMessage =  '<h1 class="popup-header">' + intersectionData[0] + '</h1>' +
-            '<p class="popup-message">' + attribs.label + '</br>' +
-            ' Community District ID: ' + intersectionData[1] + '</br>' +
-            ' <a href="https://www.nature.org/en-us/" target="_blank">Learn more</a>' +
+            '<p class="popup-message"><strong>Address:</strong> ' + attribs.label + '</br>' +
+            '<strong>Community District ID:</strong> ' + intersectionData[1] + '</br>' +
+            "<strong><a target='_blank' rel='noopener noreferrer' href=" + intersectionData[2] + ">Community District Website</a></strong>" + "<br/>" +
+            "<strong><a target='_blank' rel='noopener noreferrer' href=" + intersectionData[3] + ">Community District Profile</a></strong>";
             '</p>';
         } else {
         //error message
@@ -240,7 +315,9 @@
             */
             locationStatus = null;
             districtID = null;
-            
+            cb_url_result = null;
+            cd_profile_url_result = null;
+
             //check for district layer
             if (districtLayer) {
                 //check for intersection
@@ -255,6 +332,8 @@
                         //Expected: value is "Yes" or "No"
                         locationStatus = results[0].feature.properties[priorityDistrictFieldName]
                         districtID = results[0].feature.properties[districtIDFieldName]
+                        cb_url_result = results[0].feature.properties[cb_url]
+                        cd_profile_url_result = results[0].feature.properties[cd_profile_url]
                         if (locationStatus == "Yes"){
                             locationStatus = "In Priority District"
                         } else {
@@ -273,7 +352,7 @@
                 
             }
 
-            return [locationStatus, districtID]
+            return [locationStatus, districtID, cb_url_result, cd_profile_url_result]
 
         } catch(e) {
 
