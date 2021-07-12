@@ -45,12 +45,12 @@
     <p2><br/><i>* This tool is intended for informational purposes only.</i>
        
     <br/>Developed by <a target='_blank' rel='noopener noreferrer' href="https://www.nature.org/en-us/about-us/where-we-work/united-states/new-york/">
-        The Nature Conservancy in New York</a>
+        The Nature Conservancy - New York Division</a>
     <br/> See our 
     <a target='_blank' rel='noopener noreferrer' href="https://www.nature.org/en-us/about-us/who-we-are/accountability/terms-of-use/">Terms of Use</a> & 
     <a target='_blank' rel='noopener noreferrer' href="https://www.nature.org/en-us/about-us/who-we-are/accountability/privacy-policy/">Privacy Statment</a>
     <br/>
-    <a target='_blank' rel='noopener noreferrer' href = "https://github.com/tnc-ny-science/nycgeocoder"><small><strong>Check out this project on GitHub</strong></small>
+    <a target='_blank' rel='noopener noreferrer' href = "https://github.com/tnc-ny-science/NYC_GRTA_PriorityCDMap"><small><strong>Check out this project on GitHub</strong></small>
         <img src="images/GitHub-Mark/PNG/GitHub-Mark-Light-32px.png" width="12" height="12" alt="GitHub Logo"></a>
     </p2>
 </div>
@@ -151,10 +151,10 @@
 
         legend.onAdd = function(districtmap) {
           var div = L.DomUtil.create("div", "legend");
-          div.innerHTML += "<h4>Tax Abatement<br>Priority Areas</h4>";
-          div.innerHTML += '<i1 style="background:' + priorityFill + '"></i1><span>Priority Community District</span><br>';
-          div.innerHTML += '<i1 style="background:' + nonpriorityFill + '"></i1><span>Not Priority Community District</span><br>';
-          div.innerHTML += '<i1 style="background:' + boroughs + '; outline-color:gray; outline-style:solid; outline-width:2px;"></i1><span>Borough Boundaries</span><br>';
+          div.innerHTML += "<h4>Green Roof<br/>Tax Abatement Rate</h4>";
+          div.innerHTML += '<i1 style="background:' + priorityFill + '"></i1><span>Priority Rate ($15/ sq ft)</span><br>';
+          div.innerHTML += '<i1 style="background:' + nonpriorityFill + '"></i1><span>Standard Rate ($5.23/sq ft)</span><br>';
+          div.innerHTML += '<i1 style="background:' + boroughs + '; outline-color:gray; outline-style:dashed; outline-width:2px;"></i1><span>Borough Boundaries</span><br>';
           return div;
         };
         legend.addTo(districtmap);
@@ -168,7 +168,8 @@
                 districtLayer = L.geoJSON(json, {
                     color: "gray",
                     fillOpacity: 0,
-                    weight: 2
+                    weight: 2.5,
+                    dashArray: '5,5'
                 }).addTo(districtmap);
             });
         }
@@ -196,7 +197,7 @@
                     function (layer) {
                     // optionally enable inspection of district layer here
                     return  "<strong>Community District:</strong> " + layer.feature.properties.boroname_cd + "<br/>" +
-                        "<strong>Priority Area:</strong> " + layer.feature.properties.grta_priority + "<br/>" +
+                        "<strong>Priority Tax Abatement Rate:</strong> " + layer.feature.properties.grta_priority + "<br/>" +
                         "<strong><a target='_blank' rel='noopener noreferrer' href=" + layer.feature.properties.cb_website + ">Community District Website</a></strong>" + "<br/>" +
                         "<strong><a target='_blank' rel='noopener noreferrer' href=" + layer.feature.properties.profileurl + ">Community District Profile</a></strong>";
 
@@ -364,9 +365,9 @@
                         cb_url_result = results[0].feature.properties[cb_url]
                         cd_profile_url_result = results[0].feature.properties[cd_profile_url]
                         if (locationStatus == "Yes"){
-                            locationStatus = "In Priority District"
+                            locationStatus = "<small><small>In a Priority District<br/>Priority Rate Applies ($15/sq ft)</small></small>"
                         } else {
-                            locationStatus = "Not in Priority District"
+                            locationStatus = "<small><small>Not in a Priority District<br/>Standard Rate Applies ($5.23/sq ft)</small></small>"
                         }
                         break;
                     case 2:
