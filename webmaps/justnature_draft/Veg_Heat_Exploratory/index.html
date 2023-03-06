@@ -34,13 +34,13 @@
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="data/HVI_1.js"></script>
-        <script src="data/DisplacementRisk_2.js"></script>
-        <script src="data/PracticalCanopy_3.js"></script>
-        <script src="data/ProportionofPointswith32pctVeg_4.js"></script>
-        <script src="data/PctVeg200mBufferMedian_5.js"></script>
-        <script src="data/NTABoundariesApproxNYCEJAMemberAreas_6.js"></script>
-        <script src="data/NTABoundaries2010_7.js"></script>
+        <script src="data/HVI_2.js"></script>
+        <script src="data/DisplacementRisk_3.js"></script>
+        <script src="data/PracticalCanopy_4.js"></script>
+        <script src="data/ProportionofPointswith32pctVeg_5.js"></script>
+        <script src="data/PctVeg200mBufferMedian_6.js"></script>
+        <script src="data/NTABoundariesApproxNYCEJAMemberAreas_7.js"></script>
+        <script src="data/NTABoundaries2010_8.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
@@ -63,15 +63,28 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        map.createPane('pane_PropVeg200mBuffer_0');
-        map.getPane('pane_PropVeg200mBuffer_0').style.zIndex = 400;
-        var img_PropVeg200mBuffer_0 = 'data/PropVeg200mBuffer_0.png';
-        var img_bounds_PropVeg200mBuffer_0 = [[40.495931189961766,-74.25706790635259],[40.91544572658214,-73.6991525047389]];
-        var layer_PropVeg200mBuffer_0 = new L.imageOverlay(img_PropVeg200mBuffer_0,
-                                              img_bounds_PropVeg200mBuffer_0,
-                                              {pane: 'pane_PropVeg200mBuffer_0'});
-        bounds_group.addLayer(layer_PropVeg200mBuffer_0);
-        function pop_HVI_1(feature, layer) {
+        map.createPane('pane_GoogleSatelliteHybrid_0');
+        map.getPane('pane_GoogleSatelliteHybrid_0').style.zIndex = 400;
+        var layer_GoogleSatelliteHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatelliteHybrid_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_GoogleSatelliteHybrid_0;
+        map.addLayer(layer_GoogleSatelliteHybrid_0);
+        map.createPane('pane_PropVeg200mBuffer_1');
+        map.getPane('pane_PropVeg200mBuffer_1').style.zIndex = 401;
+        var img_PropVeg200mBuffer_1 = 'data/PropVeg200mBuffer_1.png';
+        var img_bounds_PropVeg200mBuffer_1 = [[40.495931189961766,-74.25706790635259],[40.91544572658214,-73.6991525047389]];
+        var layer_PropVeg200mBuffer_1 = new L.imageOverlay(img_PropVeg200mBuffer_1,
+                                              img_bounds_PropVeg200mBuffer_1,
+                                              {pane: 'pane_PropVeg200mBuffer_1'});
+        bounds_group.addLayer(layer_PropVeg200mBuffer_1);
+        function pop_HVI_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ntaname'] !== null ? autolinker.link(feature.properties['ntaname'].toLocaleString()) : '') + '</td>\
@@ -104,11 +117,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_HVI_1_0(feature) {
+        function style_HVI_2_0(feature) {
             switch(String(feature.properties['hvi_rank'])) {
                 case '1':
                     return {
-                pane: 'pane_HVI_1',
+                pane: 'pane_HVI_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -123,7 +136,7 @@
                     break;
                 case '2':
                     return {
-                pane: 'pane_HVI_1',
+                pane: 'pane_HVI_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -138,7 +151,7 @@
                     break;
                 case '3':
                     return {
-                pane: 'pane_HVI_1',
+                pane: 'pane_HVI_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -153,7 +166,7 @@
                     break;
                 case '4':
                     return {
-                pane: 'pane_HVI_1',
+                pane: 'pane_HVI_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -168,7 +181,7 @@
                     break;
                 case '5':
                     return {
-                pane: 'pane_HVI_1',
+                pane: 'pane_HVI_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -183,7 +196,7 @@
                     break;
                 default:
                     return {
-                pane: 'pane_HVI_1',
+                pane: 'pane_HVI_2',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -198,21 +211,21 @@
                     break;
             }
         }
-        map.createPane('pane_HVI_1');
-        map.getPane('pane_HVI_1').style.zIndex = 401;
-        map.getPane('pane_HVI_1').style['mix-blend-mode'] = 'normal';
-        var layer_HVI_1 = new L.geoJson(json_HVI_1, {
+        map.createPane('pane_HVI_2');
+        map.getPane('pane_HVI_2').style.zIndex = 402;
+        map.getPane('pane_HVI_2').style['mix-blend-mode'] = 'normal';
+        var layer_HVI_2 = new L.geoJson(json_HVI_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_HVI_1',
-            layerName: 'layer_HVI_1',
-            pane: 'pane_HVI_1',
-            onEachFeature: pop_HVI_1,
-            style: style_HVI_1_0,
+            dataVar: 'json_HVI_2',
+            layerName: 'layer_HVI_2',
+            pane: 'pane_HVI_2',
+            onEachFeature: pop_HVI_2,
+            style: style_HVI_2_0,
         });
-        bounds_group.addLayer(layer_HVI_1);
-        map.addLayer(layer_HVI_1);
-        function pop_DisplacementRisk_2(feature, layer) {
+        bounds_group.addLayer(layer_HVI_2);
+        map.addLayer(layer_HVI_2);
+        function pop_DisplacementRisk_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
@@ -236,11 +249,11 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_DisplacementRisk_2_0(feature) {
+        function style_DisplacementRisk_3_0(feature) {
             switch(String(feature.properties['DRI_Subindices_Indicators_DisplacementRiskIndex'])) {
                 case 'Higher':
                     return {
-                pane: 'pane_DisplacementRisk_2',
+                pane: 'pane_DisplacementRisk_3',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -255,7 +268,7 @@
                     break;
                 case 'Highest':
                     return {
-                pane: 'pane_DisplacementRisk_2',
+                pane: 'pane_DisplacementRisk_3',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -270,7 +283,7 @@
                     break;
                 case 'Intermediate':
                     return {
-                pane: 'pane_DisplacementRisk_2',
+                pane: 'pane_DisplacementRisk_3',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -285,7 +298,7 @@
                     break;
                 case 'Lower':
                     return {
-                pane: 'pane_DisplacementRisk_2',
+                pane: 'pane_DisplacementRisk_3',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -300,7 +313,7 @@
                     break;
                 case 'Lowest':
                     return {
-                pane: 'pane_DisplacementRisk_2',
+                pane: 'pane_DisplacementRisk_3',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -315,7 +328,7 @@
                     break;
                 default:
                     return {
-                pane: 'pane_DisplacementRisk_2',
+                pane: 'pane_DisplacementRisk_3',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -330,20 +343,20 @@
                     break;
             }
         }
-        map.createPane('pane_DisplacementRisk_2');
-        map.getPane('pane_DisplacementRisk_2').style.zIndex = 402;
-        map.getPane('pane_DisplacementRisk_2').style['mix-blend-mode'] = 'normal';
-        var layer_DisplacementRisk_2 = new L.geoJson(json_DisplacementRisk_2, {
+        map.createPane('pane_DisplacementRisk_3');
+        map.getPane('pane_DisplacementRisk_3').style.zIndex = 403;
+        map.getPane('pane_DisplacementRisk_3').style['mix-blend-mode'] = 'normal';
+        var layer_DisplacementRisk_3 = new L.geoJson(json_DisplacementRisk_3, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_DisplacementRisk_2',
-            layerName: 'layer_DisplacementRisk_2',
-            pane: 'pane_DisplacementRisk_2',
-            onEachFeature: pop_DisplacementRisk_2,
-            style: style_DisplacementRisk_2_0,
+            dataVar: 'json_DisplacementRisk_3',
+            layerName: 'layer_DisplacementRisk_3',
+            pane: 'pane_DisplacementRisk_3',
+            onEachFeature: pop_DisplacementRisk_3,
+            style: style_DisplacementRisk_3_0,
         });
-        bounds_group.addLayer(layer_DisplacementRisk_2);
-        function pop_PracticalCanopy_3(feature, layer) {
+        bounds_group.addLayer(layer_DisplacementRisk_3);
+        function pop_PracticalCanopy_4(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
@@ -418,10 +431,10 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_PracticalCanopy_3_0(feature) {
+        function style_PracticalCanopy_4_0(feature) {
             if (feature.properties['practcanopy_total_percent'] >= 0.517520 && feature.properties['practcanopy_total_percent'] <= 10.507350 ) {
                 return {
-                pane: 'pane_PracticalCanopy_3',
+                pane: 'pane_PracticalCanopy_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -436,7 +449,7 @@
             }
             if (feature.properties['practcanopy_total_percent'] >= 10.507350 && feature.properties['practcanopy_total_percent'] <= 20.497180 ) {
                 return {
-                pane: 'pane_PracticalCanopy_3',
+                pane: 'pane_PracticalCanopy_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -451,7 +464,7 @@
             }
             if (feature.properties['practcanopy_total_percent'] >= 20.497180 && feature.properties['practcanopy_total_percent'] <= 30.487010 ) {
                 return {
-                pane: 'pane_PracticalCanopy_3',
+                pane: 'pane_PracticalCanopy_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -466,7 +479,7 @@
             }
             if (feature.properties['practcanopy_total_percent'] >= 30.487010 && feature.properties['practcanopy_total_percent'] <= 40.476840 ) {
                 return {
-                pane: 'pane_PracticalCanopy_3',
+                pane: 'pane_PracticalCanopy_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -481,7 +494,7 @@
             }
             if (feature.properties['practcanopy_total_percent'] >= 40.476840 && feature.properties['practcanopy_total_percent'] <= 50.466670 ) {
                 return {
-                pane: 'pane_PracticalCanopy_3',
+                pane: 'pane_PracticalCanopy_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -495,20 +508,20 @@
             }
             }
         }
-        map.createPane('pane_PracticalCanopy_3');
-        map.getPane('pane_PracticalCanopy_3').style.zIndex = 403;
-        map.getPane('pane_PracticalCanopy_3').style['mix-blend-mode'] = 'normal';
-        var layer_PracticalCanopy_3 = new L.geoJson(json_PracticalCanopy_3, {
+        map.createPane('pane_PracticalCanopy_4');
+        map.getPane('pane_PracticalCanopy_4').style.zIndex = 404;
+        map.getPane('pane_PracticalCanopy_4').style['mix-blend-mode'] = 'normal';
+        var layer_PracticalCanopy_4 = new L.geoJson(json_PracticalCanopy_4, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_PracticalCanopy_3',
-            layerName: 'layer_PracticalCanopy_3',
-            pane: 'pane_PracticalCanopy_3',
-            onEachFeature: pop_PracticalCanopy_3,
-            style: style_PracticalCanopy_3_0,
+            dataVar: 'json_PracticalCanopy_4',
+            layerName: 'layer_PracticalCanopy_4',
+            pane: 'pane_PracticalCanopy_4',
+            onEachFeature: pop_PracticalCanopy_4,
+            style: style_PracticalCanopy_4_0,
         });
-        bounds_group.addLayer(layer_PracticalCanopy_3);
-        function pop_ProportionofPointswith32pctVeg_4(feature, layer) {
+        bounds_group.addLayer(layer_PracticalCanopy_4);
+        function pop_ProportionofPointswith32pctVeg_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
@@ -559,10 +572,10 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_ProportionofPointswith32pctVeg_4_0(feature) {
+        function style_ProportionofPointswith32pctVeg_5_0(feature) {
             if (feature.properties['prop_gte32pctveg'] >= 0.000000 && feature.properties['prop_gte32pctveg'] <= 0.000000 ) {
                 return {
-                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                pane: 'pane_ProportionofPointswith32pctVeg_5',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -577,7 +590,7 @@
             }
             if (feature.properties['prop_gte32pctveg'] >= 0.000000 && feature.properties['prop_gte32pctveg'] <= 0.180965 ) {
                 return {
-                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                pane: 'pane_ProportionofPointswith32pctVeg_5',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -592,7 +605,7 @@
             }
             if (feature.properties['prop_gte32pctveg'] >= 0.180965 && feature.properties['prop_gte32pctveg'] <= 0.271448 ) {
                 return {
-                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                pane: 'pane_ProportionofPointswith32pctVeg_5',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -607,7 +620,7 @@
             }
             if (feature.properties['prop_gte32pctveg'] >= 0.271448 && feature.properties['prop_gte32pctveg'] <= 0.361931 ) {
                 return {
-                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                pane: 'pane_ProportionofPointswith32pctVeg_5',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -622,7 +635,7 @@
             }
             if (feature.properties['prop_gte32pctveg'] >= 0.361931 && feature.properties['prop_gte32pctveg'] <= 0.452414 ) {
                 return {
-                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                pane: 'pane_ProportionofPointswith32pctVeg_5',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -637,7 +650,7 @@
             }
             if (feature.properties['prop_gte32pctveg'] >= 0.452414 && feature.properties['prop_gte32pctveg'] <= 0.542896 ) {
                 return {
-                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                pane: 'pane_ProportionofPointswith32pctVeg_5',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -652,7 +665,7 @@
             }
             if (feature.properties['prop_gte32pctveg'] >= 0.542896 && feature.properties['prop_gte32pctveg'] <= 0.633379 ) {
                 return {
-                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                pane: 'pane_ProportionofPointswith32pctVeg_5',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -667,7 +680,7 @@
             }
             if (feature.properties['prop_gte32pctveg'] >= 0.633379 && feature.properties['prop_gte32pctveg'] <= 0.723862 ) {
                 return {
-                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                pane: 'pane_ProportionofPointswith32pctVeg_5',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -682,7 +695,7 @@
             }
             if (feature.properties['prop_gte32pctveg'] >= 0.723862 && feature.properties['prop_gte32pctveg'] <= 0.814345 ) {
                 return {
-                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                pane: 'pane_ProportionofPointswith32pctVeg_5',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -697,7 +710,7 @@
             }
             if (feature.properties['prop_gte32pctveg'] >= 0.814345 && feature.properties['prop_gte32pctveg'] <= 0.904827 ) {
                 return {
-                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                pane: 'pane_ProportionofPointswith32pctVeg_5',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -712,7 +725,7 @@
             }
             if (feature.properties['prop_gte32pctveg'] >= 0.904827 && feature.properties['prop_gte32pctveg'] <= 0.995310 ) {
                 return {
-                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                pane: 'pane_ProportionofPointswith32pctVeg_5',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -726,20 +739,20 @@
             }
             }
         }
-        map.createPane('pane_ProportionofPointswith32pctVeg_4');
-        map.getPane('pane_ProportionofPointswith32pctVeg_4').style.zIndex = 404;
-        map.getPane('pane_ProportionofPointswith32pctVeg_4').style['mix-blend-mode'] = 'normal';
-        var layer_ProportionofPointswith32pctVeg_4 = new L.geoJson(json_ProportionofPointswith32pctVeg_4, {
+        map.createPane('pane_ProportionofPointswith32pctVeg_5');
+        map.getPane('pane_ProportionofPointswith32pctVeg_5').style.zIndex = 405;
+        map.getPane('pane_ProportionofPointswith32pctVeg_5').style['mix-blend-mode'] = 'normal';
+        var layer_ProportionofPointswith32pctVeg_5 = new L.geoJson(json_ProportionofPointswith32pctVeg_5, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_ProportionofPointswith32pctVeg_4',
-            layerName: 'layer_ProportionofPointswith32pctVeg_4',
-            pane: 'pane_ProportionofPointswith32pctVeg_4',
-            onEachFeature: pop_ProportionofPointswith32pctVeg_4,
-            style: style_ProportionofPointswith32pctVeg_4_0,
+            dataVar: 'json_ProportionofPointswith32pctVeg_5',
+            layerName: 'layer_ProportionofPointswith32pctVeg_5',
+            pane: 'pane_ProportionofPointswith32pctVeg_5',
+            onEachFeature: pop_ProportionofPointswith32pctVeg_5,
+            style: style_ProportionofPointswith32pctVeg_5_0,
         });
-        bounds_group.addLayer(layer_ProportionofPointswith32pctVeg_4);
-        function pop_PctVeg200mBufferMedian_5(feature, layer) {
+        bounds_group.addLayer(layer_ProportionofPointswith32pctVeg_5);
+        function pop_PctVeg200mBufferMedian_6(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
@@ -790,10 +803,10 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_PctVeg200mBufferMedian_5_0(feature) {
+        function style_PctVeg200mBufferMedian_6_0(feature) {
             if (feature.properties['propveg_decile5'] >= 0.030993 && feature.properties['propveg_decile5'] <= 0.116393 ) {
                 return {
-                pane: 'pane_PctVeg200mBufferMedian_5',
+                pane: 'pane_PctVeg200mBufferMedian_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -808,7 +821,7 @@
             }
             if (feature.properties['propveg_decile5'] >= 0.116393 && feature.properties['propveg_decile5'] <= 0.201794 ) {
                 return {
-                pane: 'pane_PctVeg200mBufferMedian_5',
+                pane: 'pane_PctVeg200mBufferMedian_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -823,7 +836,7 @@
             }
             if (feature.properties['propveg_decile5'] >= 0.201794 && feature.properties['propveg_decile5'] <= 0.320000 ) {
                 return {
-                pane: 'pane_PctVeg200mBufferMedian_5',
+                pane: 'pane_PctVeg200mBufferMedian_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -838,7 +851,7 @@
             }
             if (feature.properties['propveg_decile5'] >= 0.320000 && feature.properties['propveg_decile5'] <= 0.372590 ) {
                 return {
-                pane: 'pane_PctVeg200mBufferMedian_5',
+                pane: 'pane_PctVeg200mBufferMedian_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -853,7 +866,7 @@
             }
             if (feature.properties['propveg_decile5'] >= 0.372590 && feature.properties['propveg_decile5'] <= 0.457995 ) {
                 return {
-                pane: 'pane_PctVeg200mBufferMedian_5',
+                pane: 'pane_PctVeg200mBufferMedian_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -868,7 +881,7 @@
             }
             if (feature.properties['propveg_decile5'] >= 0.457995 && feature.properties['propveg_decile5'] <= 0.543396 ) {
                 return {
-                pane: 'pane_PctVeg200mBufferMedian_5',
+                pane: 'pane_PctVeg200mBufferMedian_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -883,7 +896,7 @@
             }
             if (feature.properties['propveg_decile5'] >= 0.543396 && feature.properties['propveg_decile5'] <= 0.628796 ) {
                 return {
-                pane: 'pane_PctVeg200mBufferMedian_5',
+                pane: 'pane_PctVeg200mBufferMedian_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -898,7 +911,7 @@
             }
             if (feature.properties['propveg_decile5'] >= 0.628796 && feature.properties['propveg_decile5'] <= 0.714197 ) {
                 return {
-                pane: 'pane_PctVeg200mBufferMedian_5',
+                pane: 'pane_PctVeg200mBufferMedian_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -913,7 +926,7 @@
             }
             if (feature.properties['propveg_decile5'] >= 0.714197 && feature.properties['propveg_decile5'] <= 0.799597 ) {
                 return {
-                pane: 'pane_PctVeg200mBufferMedian_5',
+                pane: 'pane_PctVeg200mBufferMedian_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -927,21 +940,21 @@
             }
             }
         }
-        map.createPane('pane_PctVeg200mBufferMedian_5');
-        map.getPane('pane_PctVeg200mBufferMedian_5').style.zIndex = 405;
-        map.getPane('pane_PctVeg200mBufferMedian_5').style['mix-blend-mode'] = 'normal';
-        var layer_PctVeg200mBufferMedian_5 = new L.geoJson(json_PctVeg200mBufferMedian_5, {
+        map.createPane('pane_PctVeg200mBufferMedian_6');
+        map.getPane('pane_PctVeg200mBufferMedian_6').style.zIndex = 406;
+        map.getPane('pane_PctVeg200mBufferMedian_6').style['mix-blend-mode'] = 'normal';
+        var layer_PctVeg200mBufferMedian_6 = new L.geoJson(json_PctVeg200mBufferMedian_6, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_PctVeg200mBufferMedian_5',
-            layerName: 'layer_PctVeg200mBufferMedian_5',
-            pane: 'pane_PctVeg200mBufferMedian_5',
-            onEachFeature: pop_PctVeg200mBufferMedian_5,
-            style: style_PctVeg200mBufferMedian_5_0,
+            dataVar: 'json_PctVeg200mBufferMedian_6',
+            layerName: 'layer_PctVeg200mBufferMedian_6',
+            pane: 'pane_PctVeg200mBufferMedian_6',
+            onEachFeature: pop_PctVeg200mBufferMedian_6,
+            style: style_PctVeg200mBufferMedian_6_0,
         });
-        bounds_group.addLayer(layer_PctVeg200mBufferMedian_5);
-        map.addLayer(layer_PctVeg200mBufferMedian_5);
-        function pop_NTABoundariesApproxNYCEJAMemberAreas_6(feature, layer) {
+        bounds_group.addLayer(layer_PctVeg200mBufferMedian_6);
+        map.addLayer(layer_PctVeg200mBufferMedian_6);
+        function pop_NTABoundariesApproxNYCEJAMemberAreas_7(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
@@ -956,9 +969,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_NTABoundariesApproxNYCEJAMemberAreas_6_0() {
+        function style_NTABoundariesApproxNYCEJAMemberAreas_7_0() {
             return {
-                pane: 'pane_NTABoundariesApproxNYCEJAMemberAreas_6',
+                pane: 'pane_NTABoundariesApproxNYCEJAMemberAreas_7',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -969,20 +982,20 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_NTABoundariesApproxNYCEJAMemberAreas_6');
-        map.getPane('pane_NTABoundariesApproxNYCEJAMemberAreas_6').style.zIndex = 406;
-        map.getPane('pane_NTABoundariesApproxNYCEJAMemberAreas_6').style['mix-blend-mode'] = 'normal';
-        var layer_NTABoundariesApproxNYCEJAMemberAreas_6 = new L.geoJson(json_NTABoundariesApproxNYCEJAMemberAreas_6, {
+        map.createPane('pane_NTABoundariesApproxNYCEJAMemberAreas_7');
+        map.getPane('pane_NTABoundariesApproxNYCEJAMemberAreas_7').style.zIndex = 407;
+        map.getPane('pane_NTABoundariesApproxNYCEJAMemberAreas_7').style['mix-blend-mode'] = 'normal';
+        var layer_NTABoundariesApproxNYCEJAMemberAreas_7 = new L.geoJson(json_NTABoundariesApproxNYCEJAMemberAreas_7, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_NTABoundariesApproxNYCEJAMemberAreas_6',
-            layerName: 'layer_NTABoundariesApproxNYCEJAMemberAreas_6',
-            pane: 'pane_NTABoundariesApproxNYCEJAMemberAreas_6',
-            onEachFeature: pop_NTABoundariesApproxNYCEJAMemberAreas_6,
-            style: style_NTABoundariesApproxNYCEJAMemberAreas_6_0,
+            dataVar: 'json_NTABoundariesApproxNYCEJAMemberAreas_7',
+            layerName: 'layer_NTABoundariesApproxNYCEJAMemberAreas_7',
+            pane: 'pane_NTABoundariesApproxNYCEJAMemberAreas_7',
+            onEachFeature: pop_NTABoundariesApproxNYCEJAMemberAreas_7,
+            style: style_NTABoundariesApproxNYCEJAMemberAreas_7_0,
         });
-        bounds_group.addLayer(layer_NTABoundariesApproxNYCEJAMemberAreas_6);
-        function pop_NTABoundaries2010_7(feature, layer) {
+        bounds_group.addLayer(layer_NTABoundariesApproxNYCEJAMemberAreas_7);
+        function pop_NTABoundaries2010_8(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
@@ -997,9 +1010,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_NTABoundaries2010_7_0() {
+        function style_NTABoundaries2010_8_0() {
             return {
-                pane: 'pane_NTABoundaries2010_7',
+                pane: 'pane_NTABoundaries2010_8',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -1010,20 +1023,20 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_NTABoundaries2010_7');
-        map.getPane('pane_NTABoundaries2010_7').style.zIndex = 407;
-        map.getPane('pane_NTABoundaries2010_7').style['mix-blend-mode'] = 'normal';
-        var layer_NTABoundaries2010_7 = new L.geoJson(json_NTABoundaries2010_7, {
+        map.createPane('pane_NTABoundaries2010_8');
+        map.getPane('pane_NTABoundaries2010_8').style.zIndex = 408;
+        map.getPane('pane_NTABoundaries2010_8').style['mix-blend-mode'] = 'normal';
+        var layer_NTABoundaries2010_8 = new L.geoJson(json_NTABoundaries2010_8, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_NTABoundaries2010_7',
-            layerName: 'layer_NTABoundaries2010_7',
-            pane: 'pane_NTABoundaries2010_7',
-            onEachFeature: pop_NTABoundaries2010_7,
-            style: style_NTABoundaries2010_7_0,
+            dataVar: 'json_NTABoundaries2010_8',
+            layerName: 'layer_NTABoundaries2010_8',
+            pane: 'pane_NTABoundaries2010_8',
+            onEachFeature: pop_NTABoundaries2010_8,
+            style: style_NTABoundaries2010_8_0,
         });
-        bounds_group.addLayer(layer_NTABoundaries2010_7);
-        map.addLayer(layer_NTABoundaries2010_7);
+        bounds_group.addLayer(layer_NTABoundaries2010_8);
+        map.addLayer(layer_NTABoundaries2010_8);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -1035,7 +1048,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/NTABoundaries2010_7.png" /> NTA Boundaries (2010)': layer_NTABoundaries2010_7,'<img src="legend/NTABoundariesApproxNYCEJAMemberAreas_6.png" /> NTA Boundaries - Approx NYCEJA Member Areas': layer_NTABoundariesApproxNYCEJAMemberAreas_6,'Pct Veg 200m Buffer - Median<br /><table><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_003101160.png" /></td><td>0.031 - 0.116</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_011602021.png" /></td><td>0.116 - 0.202</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_02020322.png" /></td><td>0.202 - 0.32</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_03203733.png" /></td><td>0.32 - 0.373</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_037304584.png" /></td><td>0.373 - 0.458</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_045805435.png" /></td><td>0.458 - 0.543</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_054306296.png" /></td><td>0.543 - 0.629</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_062907147.png" /></td><td>0.629 - 0.714</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_0714088.png" /></td><td>0.714 - 0.8</td></tr></table>': layer_PctVeg200mBufferMedian_5,'Proportion of Points with >= 32 pct Veg<br /><table><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_000.png" /></td><td>0 - 0</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_001811.png" /></td><td>0 - 0.181</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_018102712.png" /></td><td>0.181 - 0.271</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_027103623.png" /></td><td>0.271 - 0.362</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_036204524.png" /></td><td>0.362 - 0.452</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_045205435.png" /></td><td>0.452 - 0.543</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_054306336.png" /></td><td>0.543 - 0.633</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_063307247.png" /></td><td>0.633 - 0.724</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_072408148.png" /></td><td>0.724 - 0.814</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_081409059.png" /></td><td>0.814 - 0.905</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_0905099510.png" /></td><td>0.905 - 0.995</td></tr></table>': layer_ProportionofPointswith32pctVeg_4,'Practical Canopy<br /><table><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_3_1110.png" /></td><td>1 - 11</td></tr><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_3_11201.png" /></td><td>11 - 20</td></tr><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_3_20302.png" /></td><td>20 - 30</td></tr><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_3_30403.png" /></td><td>30 - 40</td></tr><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_3_40504.png" /></td><td>40 - 50</td></tr></table>': layer_PracticalCanopy_3,'Displacement Risk<br /><table><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_2_Higher0.png" /></td><td>Higher</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_2_Highest1.png" /></td><td>Highest</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_2_Intermediate2.png" /></td><td>Intermediate</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_2_Lower3.png" /></td><td>Lower</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_2_Lowest4.png" /></td><td>Lowest</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_2_5.png" /></td><td></td></tr></table>': layer_DisplacementRisk_2,'HVI<br /><table><tr><td style="text-align: center;"><img src="legend/HVI_1_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_1_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_1_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_1_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_1_54.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_1_UnpopulatedArea5.png" /></td><td>Unpopulated Area</td></tr></table>': layer_HVI_1,"Prop Veg 200m Buffer": layer_PropVeg200mBuffer_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/NTABoundaries2010_8.png" /> NTA Boundaries (2010)': layer_NTABoundaries2010_8,'<img src="legend/NTABoundariesApproxNYCEJAMemberAreas_7.png" /> NTA Boundaries - Approx NYCEJA Member Areas': layer_NTABoundariesApproxNYCEJAMemberAreas_7,'Pct Veg 200m Buffer - Median<br /><table><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_6_003101160.png" /></td><td>0.031 - 0.116</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_6_011602021.png" /></td><td>0.116 - 0.202</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_6_02020322.png" /></td><td>0.202 - 0.32</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_6_03203733.png" /></td><td>0.32 - 0.373</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_6_037304584.png" /></td><td>0.373 - 0.458</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_6_045805435.png" /></td><td>0.458 - 0.543</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_6_054306296.png" /></td><td>0.543 - 0.629</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_6_062907147.png" /></td><td>0.629 - 0.714</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_6_0714088.png" /></td><td>0.714 - 0.8</td></tr></table>': layer_PctVeg200mBufferMedian_6,'Proportion of Points with >= 32 pct Veg<br /><table><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_5_000.png" /></td><td>0 - 0</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_5_001811.png" /></td><td>0 - 0.181</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_5_018102712.png" /></td><td>0.181 - 0.271</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_5_027103623.png" /></td><td>0.271 - 0.362</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_5_036204524.png" /></td><td>0.362 - 0.452</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_5_045205435.png" /></td><td>0.452 - 0.543</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_5_054306336.png" /></td><td>0.543 - 0.633</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_5_063307247.png" /></td><td>0.633 - 0.724</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_5_072408148.png" /></td><td>0.724 - 0.814</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_5_081409059.png" /></td><td>0.814 - 0.905</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_5_0905099510.png" /></td><td>0.905 - 0.995</td></tr></table>': layer_ProportionofPointswith32pctVeg_5,'Practical Canopy<br /><table><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_4_1110.png" /></td><td>1 - 11</td></tr><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_4_11201.png" /></td><td>11 - 20</td></tr><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_4_20302.png" /></td><td>20 - 30</td></tr><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_4_30403.png" /></td><td>30 - 40</td></tr><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_4_40504.png" /></td><td>40 - 50</td></tr></table>': layer_PracticalCanopy_4,'Displacement Risk<br /><table><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_3_Higher0.png" /></td><td>Higher</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_3_Highest1.png" /></td><td>Highest</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_3_Intermediate2.png" /></td><td>Intermediate</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_3_Lower3.png" /></td><td>Lower</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_3_Lowest4.png" /></td><td>Lowest</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_3_5.png" /></td><td></td></tr></table>': layer_DisplacementRisk_3,'HVI<br /><table><tr><td style="text-align: center;"><img src="legend/HVI_2_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_2_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_2_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_2_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_2_54.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_2_UnpopulatedArea5.png" /></td><td>Unpopulated Area</td></tr></table>': layer_HVI_2,"Prop Veg 200m Buffer": layer_PropVeg200mBuffer_1,"Google Satellite Hybrid": layer_GoogleSatelliteHybrid_0,},{collapsed:false}).addTo(map);
         setBounds();
         L.ImageOverlay.include({
             getBounds: function () {
