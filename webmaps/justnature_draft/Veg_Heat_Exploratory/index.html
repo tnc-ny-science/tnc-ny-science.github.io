@@ -1,0 +1,1047 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/HVI_1.js"></script>
+        <script src="data/DisplacementRisk_2.js"></script>
+        <script src="data/PracticalCanopy_3.js"></script>
+        <script src="data/ProportionofPointswith32pctVeg_4.js"></script>
+        <script src="data/PctVeg200mBufferMedian_5.js"></script>
+        <script src="data/NTABoundariesApproxNYCEJAMemberAreas_6.js"></script>
+        <script src="data/NTABoundaries2010_7.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[40.493628253035254,-74.46969689531295],[40.93472180915006,-73.60487112937433]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'feet',
+            secondaryLengthUnit: 'miles',
+            primaryAreaUnit: 'sqfeet',
+            secondaryAreaUnit: 'sqmiles'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_PropVeg200mBuffer_0');
+        map.getPane('pane_PropVeg200mBuffer_0').style.zIndex = 400;
+        var img_PropVeg200mBuffer_0 = 'data/PropVeg200mBuffer_0.png';
+        var img_bounds_PropVeg200mBuffer_0 = [[40.495931189961766,-74.25706790635259],[40.91544572658214,-73.6991525047389]];
+        var layer_PropVeg200mBuffer_0 = new L.imageOverlay(img_PropVeg200mBuffer_0,
+                                              img_bounds_PropVeg200mBuffer_0,
+                                              {pane: 'pane_PropVeg200mBuffer_0'});
+        bounds_group.addLayer(layer_PropVeg200mBuffer_0);
+        function pop_HVI_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ntaname'] !== null ? autolinker.link(feature.properties['ntaname'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_length'] !== null ? autolinker.link(feature.properties['shape_length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_area'] !== null ? autolinker.link(feature.properties['shape_area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['year'] !== null ? autolinker.link(feature.properties['year'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['borough'] !== null ? autolinker.link(feature.properties['borough'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['geography.id'] !== null ? autolinker.link(feature.properties['geography.id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['hvi_rank'] !== null ? autolinker.link(feature.properties['hvi_rank'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['pgid'] !== null ? autolinker.link(feature.properties['pgid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_HVI_1_0(feature) {
+            switch(String(feature.properties['hvi_rank'])) {
+                case '1':
+                    return {
+                pane: 'pane_HVI_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(246,208,203,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_HVI_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,150,137,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_HVI_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,92,72,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_HVI_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,50,27,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_HVI_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(156,42,22,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_HVI_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(150,150,150,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_HVI_1');
+        map.getPane('pane_HVI_1').style.zIndex = 401;
+        map.getPane('pane_HVI_1').style['mix-blend-mode'] = 'normal';
+        var layer_HVI_1 = new L.geoJson(json_HVI_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_HVI_1',
+            layerName: 'layer_HVI_1',
+            pane: 'pane_HVI_1',
+            onEachFeature: pop_HVI_1,
+            style: style_HVI_1_0,
+        });
+        bounds_group.addLayer(layer_HVI_1);
+        map.addLayer(layer_HVI_1);
+        function pop_DisplacementRisk_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ntaname'] !== null ? autolinker.link(feature.properties['ntaname'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['pgid'] !== null ? autolinker.link(feature.properties['pgid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DRI_Subindices_Indicators_DisplacementRiskIndex'] !== null ? autolinker.link(feature.properties['DRI_Subindices_Indicators_DisplacementRiskIndex'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DRI_Subindices_Indicators_PopulationVulnerability'] !== null ? autolinker.link(feature.properties['DRI_Subindices_Indicators_PopulationVulnerability'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DRI_Subindices_Indicators_NotWhite'] !== null ? autolinker.link(feature.properties['DRI_Subindices_Indicators_NotWhite'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_DisplacementRisk_2_0(feature) {
+            switch(String(feature.properties['DRI_Subindices_Indicators_DisplacementRiskIndex'])) {
+                case 'Higher':
+                    return {
+                pane: 'pane_DisplacementRisk_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,234,70,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Highest':
+                    return {
+                pane: 'pane_DisplacementRisk_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,187,105,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Intermediate':
+                    return {
+                pane: 'pane_DisplacementRisk_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(150,144,120,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lower':
+                    return {
+                pane: 'pane_DisplacementRisk_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,105,112,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lowest':
+                    return {
+                pane: 'pane_DisplacementRisk_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(49,68,107,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_DisplacementRisk_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,32,77,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_DisplacementRisk_2');
+        map.getPane('pane_DisplacementRisk_2').style.zIndex = 402;
+        map.getPane('pane_DisplacementRisk_2').style['mix-blend-mode'] = 'normal';
+        var layer_DisplacementRisk_2 = new L.geoJson(json_DisplacementRisk_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_DisplacementRisk_2',
+            layerName: 'layer_DisplacementRisk_2',
+            pane: 'pane_DisplacementRisk_2',
+            onEachFeature: pop_DisplacementRisk_2,
+            style: style_DisplacementRisk_2_0,
+        });
+        bounds_group.addLayer(layer_DisplacementRisk_2);
+        function pop_PracticalCanopy_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ntaname'] !== null ? autolinker.link(feature.properties['ntaname'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['boroname'] !== null ? autolinker.link(feature.properties['boroname'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['land_area_acres'] !== null ? autolinker.link(feature.properties['land_area_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['canopy_2017_acres'] !== null ? autolinker.link(feature.properties['canopy_2017_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['canopy_2017_percent'] !== null ? autolinker.link(feature.properties['canopy_2017_percent'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_total_acres'] !== null ? autolinker.link(feature.properties['practcanopy_total_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_total_percent'] !== null ? autolinker.link(feature.properties['practcanopy_total_percent'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_source_plantable_acres'] !== null ? autolinker.link(feature.properties['practcanopy_source_plantable_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_source_grown_acres'] !== null ? autolinker.link(feature.properties['practcanopy_source_grown_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_source_streettree_acres'] !== null ? autolinker.link(feature.properties['practcanopy_source_streettree_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_city_total_acres'] !== null ? autolinker.link(feature.properties['practcanopy_city_total_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_state_total_acres'] !== null ? autolinker.link(feature.properties['practcanopy_state_total_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_fed_total_acres'] !== null ? autolinker.link(feature.properties['practcanopy_fed_total_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_private_total_acres'] !== null ? autolinker.link(feature.properties['practcanopy_private_total_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_city_rightsofway_acres'] !== null ? autolinker.link(feature.properties['practcanopy_city_rightsofway_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_city_parkland_acres'] !== null ? autolinker.link(feature.properties['practcanopy_city_parkland_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_city_other_acres'] !== null ? autolinker.link(feature.properties['practcanopy_city_other_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_private_facinst_acres'] !== null ? autolinker.link(feature.properties['practcanopy_private_facinst_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_private_res12_acres'] !== null ? autolinker.link(feature.properties['practcanopy_private_res12_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_private_res3plus_acres'] !== null ? autolinker.link(feature.properties['practcanopy_private_res3plus_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_private_nonresdev_acres'] !== null ? autolinker.link(feature.properties['practcanopy_private_nonresdev_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['practcanopy_private_vacant_acres'] !== null ? autolinker.link(feature.properties['practcanopy_private_vacant_acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_PracticalCanopy_3_0(feature) {
+            if (feature.properties['practcanopy_total_percent'] >= 0.517520 && feature.properties['practcanopy_total_percent'] <= 10.507350 ) {
+                return {
+                pane: 'pane_PracticalCanopy_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,251,255,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['practcanopy_total_percent'] >= 10.507350 && feature.properties['practcanopy_total_percent'] <= 20.497180 ) {
+                return {
+                pane: 'pane_PracticalCanopy_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,220,240,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['practcanopy_total_percent'] >= 20.497180 && feature.properties['practcanopy_total_percent'] <= 30.487010 ) {
+                return {
+                pane: 'pane_PracticalCanopy_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(115,178,216,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['practcanopy_total_percent'] >= 30.487010 && feature.properties['practcanopy_total_percent'] <= 40.476840 ) {
+                return {
+                pane: 'pane_PracticalCanopy_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(41,121,185,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['practcanopy_total_percent'] >= 40.476840 && feature.properties['practcanopy_total_percent'] <= 50.466670 ) {
+                return {
+                pane: 'pane_PracticalCanopy_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(8,48,107,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_PracticalCanopy_3');
+        map.getPane('pane_PracticalCanopy_3').style.zIndex = 403;
+        map.getPane('pane_PracticalCanopy_3').style['mix-blend-mode'] = 'normal';
+        var layer_PracticalCanopy_3 = new L.geoJson(json_PracticalCanopy_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_PracticalCanopy_3',
+            layerName: 'layer_PracticalCanopy_3',
+            pane: 'pane_PracticalCanopy_3',
+            onEachFeature: pop_PracticalCanopy_3,
+            style: style_PracticalCanopy_3_0,
+        });
+        bounds_group.addLayer(layer_PracticalCanopy_3);
+        function pop_ProportionofPointswith32pctVeg_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['total_pts'] !== null ? autolinker.link(feature.properties['total_pts'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['min_propveg'] !== null ? autolinker.link(feature.properties['min_propveg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['max_propveg'] !== null ? autolinker.link(feature.properties['max_propveg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['avg_propveg'] !== null ? autolinker.link(feature.properties['avg_propveg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['prop_gte32pctveg'] !== null ? autolinker.link(feature.properties['prop_gte32pctveg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile1'] !== null ? autolinker.link(feature.properties['propveg_decile1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile2'] !== null ? autolinker.link(feature.properties['propveg_decile2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile3'] !== null ? autolinker.link(feature.properties['propveg_decile3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile4'] !== null ? autolinker.link(feature.properties['propveg_decile4'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile5'] !== null ? autolinker.link(feature.properties['propveg_decile5'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile6'] !== null ? autolinker.link(feature.properties['propveg_decile6'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile7'] !== null ? autolinker.link(feature.properties['propveg_decile7'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile8'] !== null ? autolinker.link(feature.properties['propveg_decile8'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile9'] !== null ? autolinker.link(feature.properties['propveg_decile9'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ProportionofPointswith32pctVeg_4_0(feature) {
+            if (feature.properties['prop_gte32pctveg'] >= 0.000000 && feature.properties['prop_gte32pctveg'] <= 0.000000 ) {
+                return {
+                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,1,84,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['prop_gte32pctveg'] >= 0.000000 && feature.properties['prop_gte32pctveg'] <= 0.180965 ) {
+                return {
+                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,37,118,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['prop_gte32pctveg'] >= 0.180965 && feature.properties['prop_gte32pctveg'] <= 0.271448 ) {
+                return {
+                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(65,67,135,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['prop_gte32pctveg'] >= 0.271448 && feature.properties['prop_gte32pctveg'] <= 0.361931 ) {
+                return {
+                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(52,95,141,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['prop_gte32pctveg'] >= 0.361931 && feature.properties['prop_gte32pctveg'] <= 0.452414 ) {
+                return {
+                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(42,120,142,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['prop_gte32pctveg'] >= 0.452414 && feature.properties['prop_gte32pctveg'] <= 0.542896 ) {
+                return {
+                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(33,144,141,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['prop_gte32pctveg'] >= 0.542896 && feature.properties['prop_gte32pctveg'] <= 0.633379 ) {
+                return {
+                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(35,168,132,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['prop_gte32pctveg'] >= 0.633379 && feature.properties['prop_gte32pctveg'] <= 0.723862 ) {
+                return {
+                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(67,191,112,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['prop_gte32pctveg'] >= 0.723862 && feature.properties['prop_gte32pctveg'] <= 0.814345 ) {
+                return {
+                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(122,209,81,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['prop_gte32pctveg'] >= 0.814345 && feature.properties['prop_gte32pctveg'] <= 0.904827 ) {
+                return {
+                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(188,223,39,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['prop_gte32pctveg'] >= 0.904827 && feature.properties['prop_gte32pctveg'] <= 0.995310 ) {
+                return {
+                pane: 'pane_ProportionofPointswith32pctVeg_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,231,37,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_ProportionofPointswith32pctVeg_4');
+        map.getPane('pane_ProportionofPointswith32pctVeg_4').style.zIndex = 404;
+        map.getPane('pane_ProportionofPointswith32pctVeg_4').style['mix-blend-mode'] = 'normal';
+        var layer_ProportionofPointswith32pctVeg_4 = new L.geoJson(json_ProportionofPointswith32pctVeg_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ProportionofPointswith32pctVeg_4',
+            layerName: 'layer_ProportionofPointswith32pctVeg_4',
+            pane: 'pane_ProportionofPointswith32pctVeg_4',
+            onEachFeature: pop_ProportionofPointswith32pctVeg_4,
+            style: style_ProportionofPointswith32pctVeg_4_0,
+        });
+        bounds_group.addLayer(layer_ProportionofPointswith32pctVeg_4);
+        function pop_PctVeg200mBufferMedian_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['total_pts'] !== null ? autolinker.link(feature.properties['total_pts'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['min_propveg'] !== null ? autolinker.link(feature.properties['min_propveg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['max_propveg'] !== null ? autolinker.link(feature.properties['max_propveg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['avg_propveg'] !== null ? autolinker.link(feature.properties['avg_propveg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['prop_gte32pctveg'] !== null ? autolinker.link(feature.properties['prop_gte32pctveg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile1'] !== null ? autolinker.link(feature.properties['propveg_decile1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile2'] !== null ? autolinker.link(feature.properties['propveg_decile2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile3'] !== null ? autolinker.link(feature.properties['propveg_decile3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile4'] !== null ? autolinker.link(feature.properties['propveg_decile4'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile5'] !== null ? autolinker.link(feature.properties['propveg_decile5'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile6'] !== null ? autolinker.link(feature.properties['propveg_decile6'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile7'] !== null ? autolinker.link(feature.properties['propveg_decile7'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile8'] !== null ? autolinker.link(feature.properties['propveg_decile8'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['propveg_decile9'] !== null ? autolinker.link(feature.properties['propveg_decile9'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_PctVeg200mBufferMedian_5_0(feature) {
+            if (feature.properties['propveg_decile5'] >= 0.030993 && feature.properties['propveg_decile5'] <= 0.116393 ) {
+                return {
+                pane: 'pane_PctVeg200mBufferMedian_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(208,28,139,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['propveg_decile5'] >= 0.116393 && feature.properties['propveg_decile5'] <= 0.201794 ) {
+                return {
+                pane: 'pane_PctVeg200mBufferMedian_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,105,179,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['propveg_decile5'] >= 0.201794 && feature.properties['propveg_decile5'] <= 0.320000 ) {
+                return {
+                pane: 'pane_PctVeg200mBufferMedian_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(241,182,218,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['propveg_decile5'] >= 0.320000 && feature.properties['propveg_decile5'] <= 0.372590 ) {
+                return {
+                pane: 'pane_PctVeg200mBufferMedian_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(239,244,232,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['propveg_decile5'] >= 0.372590 && feature.properties['propveg_decile5'] <= 0.457995 ) {
+                return {
+                pane: 'pane_PctVeg200mBufferMedian_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(221,238,200,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['propveg_decile5'] >= 0.457995 && feature.properties['propveg_decile5'] <= 0.543396 ) {
+                return {
+                pane: 'pane_PctVeg200mBufferMedian_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,231,167,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['propveg_decile5'] >= 0.543396 && feature.properties['propveg_decile5'] <= 0.628796 ) {
+                return {
+                pane: 'pane_PctVeg200mBufferMedian_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(184,225,134,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['propveg_decile5'] >= 0.628796 && feature.properties['propveg_decile5'] <= 0.714197 ) {
+                return {
+                pane: 'pane_PctVeg200mBufferMedian_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(131,199,86,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['propveg_decile5'] >= 0.714197 && feature.properties['propveg_decile5'] <= 0.799597 ) {
+                return {
+                pane: 'pane_PctVeg200mBufferMedian_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(77,172,38,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_PctVeg200mBufferMedian_5');
+        map.getPane('pane_PctVeg200mBufferMedian_5').style.zIndex = 405;
+        map.getPane('pane_PctVeg200mBufferMedian_5').style['mix-blend-mode'] = 'normal';
+        var layer_PctVeg200mBufferMedian_5 = new L.geoJson(json_PctVeg200mBufferMedian_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_PctVeg200mBufferMedian_5',
+            layerName: 'layer_PctVeg200mBufferMedian_5',
+            pane: 'pane_PctVeg200mBufferMedian_5',
+            onEachFeature: pop_PctVeg200mBufferMedian_5,
+            style: style_PctVeg200mBufferMedian_5_0,
+        });
+        bounds_group.addLayer(layer_PctVeg200mBufferMedian_5);
+        map.addLayer(layer_PctVeg200mBufferMedian_5);
+        function pop_NTABoundariesApproxNYCEJAMemberAreas_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ntaname'] !== null ? autolinker.link(feature.properties['ntaname'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['pgid'] !== null ? autolinker.link(feature.properties['pgid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_NTABoundariesApproxNYCEJAMemberAreas_6_0() {
+            return {
+                pane: 'pane_NTABoundariesApproxNYCEJAMemberAreas_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_NTABoundariesApproxNYCEJAMemberAreas_6');
+        map.getPane('pane_NTABoundariesApproxNYCEJAMemberAreas_6').style.zIndex = 406;
+        map.getPane('pane_NTABoundariesApproxNYCEJAMemberAreas_6').style['mix-blend-mode'] = 'normal';
+        var layer_NTABoundariesApproxNYCEJAMemberAreas_6 = new L.geoJson(json_NTABoundariesApproxNYCEJAMemberAreas_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_NTABoundariesApproxNYCEJAMemberAreas_6',
+            layerName: 'layer_NTABoundariesApproxNYCEJAMemberAreas_6',
+            pane: 'pane_NTABoundariesApproxNYCEJAMemberAreas_6',
+            onEachFeature: pop_NTABoundariesApproxNYCEJAMemberAreas_6,
+            style: style_NTABoundariesApproxNYCEJAMemberAreas_6_0,
+        });
+        bounds_group.addLayer(layer_NTABoundariesApproxNYCEJAMemberAreas_6);
+        function pop_NTABoundaries2010_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ntacode'] !== null ? autolinker.link(feature.properties['ntacode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ntaname'] !== null ? autolinker.link(feature.properties['ntaname'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['pgid'] !== null ? autolinker.link(feature.properties['pgid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_NTABoundaries2010_7_0() {
+            return {
+                pane: 'pane_NTABoundaries2010_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_NTABoundaries2010_7');
+        map.getPane('pane_NTABoundaries2010_7').style.zIndex = 407;
+        map.getPane('pane_NTABoundaries2010_7').style['mix-blend-mode'] = 'normal';
+        var layer_NTABoundaries2010_7 = new L.geoJson(json_NTABoundaries2010_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_NTABoundaries2010_7',
+            layerName: 'layer_NTABoundaries2010_7',
+            pane: 'pane_NTABoundaries2010_7',
+            onEachFeature: pop_NTABoundaries2010_7,
+            style: style_NTABoundaries2010_7_0,
+        });
+        bounds_group.addLayer(layer_NTABoundaries2010_7);
+        map.addLayer(layer_NTABoundaries2010_7);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/NTABoundaries2010_7.png" /> NTA Boundaries (2010)': layer_NTABoundaries2010_7,'<img src="legend/NTABoundariesApproxNYCEJAMemberAreas_6.png" /> NTA Boundaries - Approx NYCEJA Member Areas': layer_NTABoundariesApproxNYCEJAMemberAreas_6,'Pct Veg 200m Buffer - Median<br /><table><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_003101160.png" /></td><td>0.031 - 0.116</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_011602021.png" /></td><td>0.116 - 0.202</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_02020322.png" /></td><td>0.202 - 0.32</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_03203733.png" /></td><td>0.32 - 0.373</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_037304584.png" /></td><td>0.373 - 0.458</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_045805435.png" /></td><td>0.458 - 0.543</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_054306296.png" /></td><td>0.543 - 0.629</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_062907147.png" /></td><td>0.629 - 0.714</td></tr><tr><td style="text-align: center;"><img src="legend/PctVeg200mBufferMedian_5_0714088.png" /></td><td>0.714 - 0.8</td></tr></table>': layer_PctVeg200mBufferMedian_5,'Proportion of Points with >= 32 pct Veg<br /><table><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_000.png" /></td><td>0 - 0</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_001811.png" /></td><td>0 - 0.181</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_018102712.png" /></td><td>0.181 - 0.271</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_027103623.png" /></td><td>0.271 - 0.362</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_036204524.png" /></td><td>0.362 - 0.452</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_045205435.png" /></td><td>0.452 - 0.543</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_054306336.png" /></td><td>0.543 - 0.633</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_063307247.png" /></td><td>0.633 - 0.724</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_072408148.png" /></td><td>0.724 - 0.814</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_081409059.png" /></td><td>0.814 - 0.905</td></tr><tr><td style="text-align: center;"><img src="legend/ProportionofPointswith32pctVeg_4_0905099510.png" /></td><td>0.905 - 0.995</td></tr></table>': layer_ProportionofPointswith32pctVeg_4,'Practical Canopy<br /><table><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_3_1110.png" /></td><td>1 - 11</td></tr><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_3_11201.png" /></td><td>11 - 20</td></tr><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_3_20302.png" /></td><td>20 - 30</td></tr><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_3_30403.png" /></td><td>30 - 40</td></tr><tr><td style="text-align: center;"><img src="legend/PracticalCanopy_3_40504.png" /></td><td>40 - 50</td></tr></table>': layer_PracticalCanopy_3,'Displacement Risk<br /><table><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_2_Higher0.png" /></td><td>Higher</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_2_Highest1.png" /></td><td>Highest</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_2_Intermediate2.png" /></td><td>Intermediate</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_2_Lower3.png" /></td><td>Lower</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_2_Lowest4.png" /></td><td>Lowest</td></tr><tr><td style="text-align: center;"><img src="legend/DisplacementRisk_2_5.png" /></td><td></td></tr></table>': layer_DisplacementRisk_2,'HVI<br /><table><tr><td style="text-align: center;"><img src="legend/HVI_1_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_1_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_1_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_1_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_1_54.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/HVI_1_UnpopulatedArea5.png" /></td><td>Unpopulated Area</td></tr></table>': layer_HVI_1,"Prop Veg 200m Buffer": layer_PropVeg200mBuffer_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        </script>
+    </body>
+</html>
