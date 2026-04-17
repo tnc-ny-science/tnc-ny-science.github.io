@@ -59,11 +59,11 @@ var lyr_NetChangeinVegCoverwithin200mofPoints20172021_3 = new ol.layer.Image({
         opacity: 1,
         
     title: 'Net Change in Veg Cover within 200m of Points (2017-2021)<br />\
-    <img src="styles/legend/NetChangeinVegCoverwithin200mofPoints20172021_3_0.png" /> -0.8362<br />\
-    <img src="styles/legend/NetChangeinVegCoverwithin200mofPoints20172021_3_1.png" /> -0.4497<br />\
-    <img src="styles/legend/NetChangeinVegCoverwithin200mofPoints20172021_3_2.png" /> -0.0632<br />\
-    <img src="styles/legend/NetChangeinVegCoverwithin200mofPoints20172021_3_3.png" /> 0.3233<br />\
-    <img src="styles/legend/NetChangeinVegCoverwithin200mofPoints20172021_3_4.png" /> 0.7099<br />' ,
+    <img src="styles/legend/NetChangeinVegCoverwithin200mofPoints20172021_3_0.png" /> -0.6328<br />\
+    <img src="styles/legend/NetChangeinVegCoverwithin200mofPoints20172021_3_1.png" /> -0.3509<br />\
+    <img src="styles/legend/NetChangeinVegCoverwithin200mofPoints20172021_3_2.png" /> -0.0691<br />\
+    <img src="styles/legend/NetChangeinVegCoverwithin200mofPoints20172021_3_3.png" /> 0.2128<br />\
+    <img src="styles/legend/NetChangeinVegCoverwithin200mofPoints20172021_3_4.png" /> 0.4946<br />' ,
         
         
         source: new ol.source.ImageStatic({
